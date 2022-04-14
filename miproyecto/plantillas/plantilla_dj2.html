@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    Excelente!!.... s muy facil usar plantillas
+
+    <p style="color:red">Mi nombre es: {{nombre}}</p>
+    <p style="color: green">Mi apellido es: {{apellido}}</p>
+    <p style="color: blue">Esto fue creahado el: {{fecha}}</p>
+    <!-- Se usa {{xxx}} para hacer refernecia a valores enviados enn el diccionario -->
+
+    Lista de notas
+
+    <p> 
+    <!--  corchetes + porcentaje se usa para bucles o condicionales  en html -->
+    {% for n in notas %}
+        {% if n < 4 %}
+            <p style="color: red"> NOTA MALA:  {{n}}</p>
+        {% else %} <p style="color: blue">NOTA BUENA: {{n}}</p>
+        {% endif %}
+        <!-- Recorre -->
+    {% endfor %}
+    <p>
+</body>
+</html>

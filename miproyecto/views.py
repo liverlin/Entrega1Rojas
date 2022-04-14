@@ -1,7 +1,8 @@
 
+from datetime import date
 from django.http import HttpResponse
 import random
-from django.template import Context, Template
+from django.template import Context, Template, loader
 
 def inicio(request):
     return HttpResponse('Hola, soy la nueva pagina')
@@ -21,11 +22,33 @@ def numero_de_usuario(request, numero):
     return HttpResponse(texto)
 
 def mi_plantilla(request):
-    plantilla = open(r"C:\Users\user\Documents\Python\EntregaFinalRojas\miproyecto\plantillas\mi_plantilla_1.html")
+    plantilla = loader.get_template('mi_plantilla_1.html')
+    door=1
+    dicpractica={"key":door}
     
-    template= Template(plantilla.read())
-    context = Context() 
-    plantilla_preparada = template.render(context)
-    #acomoda el tempalte para que HttpsResponse lo entienda
+    plantilla_preparada = plantilla.render(dicpractica)
     
     return HttpResponse(plantilla_preparada)
+
+def probandoTemplate(self):
+    nom= "Nicolas"
+    ap= "Perez"
+    day= date(2022,4,14)
+    listaNotas= [2,2,3,7,2,5]
+    
+    diccionario = {
+        "nombre": nom, 
+        "apellido": ap,
+        "fecha": day,
+        "notas":listaNotas
+        } #<--Para enviar el contexto
+    
+    plantilla =loader.get_template('plantilla_dj2.html') #Se carga en memoria nuestro documento
+    #importar template y context con: from django.template import Tem,plate, Context
+    #Cerramos el archivo
+    #le doy el contexto mi nombre y apellido
+    
+    documento = plantilla.render(diccionario) #Aca renderizamos la platilla en documetnto
+    
+    return HttpResponse(documento)    
+
