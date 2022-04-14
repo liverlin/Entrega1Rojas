@@ -55,7 +55,7 @@ ROOT_URLCONF = 'miproyecto.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [r"C:\Users\user\Documents\Python\EntregaFinalRojas\miproyecto\plantillas"],
+        'DIRS': [r"C:\Users\user\Documents\Python\EntregaFinalRojas\AppCpder\plantillas"],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
