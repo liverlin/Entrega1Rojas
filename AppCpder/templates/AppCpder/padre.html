@@ -10,8 +10,8 @@
         <meta name="description" content="" />
         <meta name="author" content="" />
         <title>Landing Page - Start Bootstrap Theme</title>
-        <!-- Favicon-->
-        <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+        <!-- ICONO DE LA PAGINA Favicon-->
+        <link rel="icon" type="image/x-icon" href="{% static 'AppCpder/assets/favicon.ico' %}" />
         <!-- Bootstrap icons-->
         <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" type="text/css" />
         <!-- Google fonts-->
@@ -27,8 +27,13 @@
         <!-- Navigation-->
         <nav class="navbar navbar-light bg-light static-top">
             <div class="container">
-                <a class="navbar-brand" href="#!">Comenzar Bootstrap</a>
-                <a class="btn btn-primary" href="#signup">Sign Up(inscribirse)</a>
+                {% comment %} <a class="navbar-brand" href="#!">Comenzar Bootstrap</a> {% endcomment %}
+                <a class="navbar-brand" href="{% url 'Inicio' %}">Inicio</a>
+                <a class="navbar-brand" href="{% url 'Profesores' %}">Profesores</a>
+                <a class="navbar-brand" href="{% url 'Cursos' %}">Cursos</a>
+                <a class="navbar-brand" href="{% url 'Estudiantes' %}">Estudiantes</a>
+                <a class="navbar-brand" href="{% url 'Entregables' %}">Entregables</a>
+                <a class="btn btn-primary" href="#NADAAUN">INICIAR</a>
             </div>
         </nav>
         <!-- Masthead-->
@@ -207,6 +212,14 @@
                 </div>
             </div>
         </section>
+
+
+        <!--Esto es lo que va a cambiar-->
+        {% block contenidoQueCambia %}
+        
+        {% endblock contenidoQueCambia %}
+
+
         <!-- Footer-->
         <footer class="footer bg-light">
             <div class="container">
