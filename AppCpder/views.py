@@ -69,3 +69,29 @@ def nuevo_curso(request):
     nuevo_curso=Curso(nombre='Curso JS',camada=camada)
     nuevo_curso.save()
     return HttpResponse(f"Se creo el curso {nuevo_curso.nombre} camada {nuevo_curso.camada}")
+
+def inicio_1(request):
+    
+    return render(request, "AppCpder/inicio.html")
+
+
+def cursos(request):
+    
+    return render(request, "AppCpder/cursos.html")
+
+
+
+def profesores(request):
+    
+    return render(request, "AppCpder/profesores.html")
+
+
+
+def estudiantes(request):
+    
+    return render(request, "AppCpder/estudiantes.html")
+
+
+def entregables(request):
+    
+    return render(request, "AppCpder/entregables.html")
