@@ -2,7 +2,7 @@
 from django import views
 from django.urls import path
 #, numero_de_usuario,otra_vista,numero_random, mi_plantilla,probandoTemplate,curso, nuevo_curso, profesores
-from .views import inicio,cursos, entregables, estudiantes,profesores,cursoFormulario,profesorFormulario
+from .views import buscar, findCamada, inicio,cursos, entregables, estudiantes,profesores,profesorFormulario
 #, inicio_1
 urlpatterns = [
     # path('',inicio),
@@ -12,8 +12,10 @@ urlpatterns = [
     path('profesores',profesores,name="Profesores"),
     path('estudiantes',estudiantes,name="Estudiantes"),
     path('entregables',entregables,name="Entregables"),
-    path('cursoFormulario',cursoFormulario ,name="CursoFormulario"),
-    path('profesorFormulario', profesorFormulario ,name="profesorFormulario")
+    # path('cursoFormulario',cursoFormulario ,name="CursoFormulario"),
+    path('profesorFormulario', profesorFormulario ,name="profesorFormulario"),
+    path('findCamada',findCamada,name="findCamada"),
+    path('AppCpder/buscar/',buscar),
     #creados con el ppt
     # path('1',inicio_1),
     # path('cursos',cursos),

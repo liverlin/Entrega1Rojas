@@ -1,3 +1,4 @@
+from asyncio.base_subprocess import ReadSubprocessPipeProto
 from django.shortcuts import render
 from datetime import date
 from django.http import HttpResponse
@@ -79,8 +80,22 @@ def inicio(request):
 
 
 def cursos(request):
-    
-    return render(request, "AppCpder/cursos.html")
+    if request.method == 'POST':
+        miFormulario= CursoFormulario(request.POST)
+        #Aqui me llega toda la informacion del html
+        print(miFormulario)
+        
+        if miFormulario.is_valid():#Si paso la validacion de Django
+            informacion = miFormulario.cleaned_data
+            
+            new_curso = Curso(nombre=informacion['curso'],camada=informacion['camada'])
+            
+            new_curso.save()
+            return render(request,"AppCpder/inicio.html",{'new_curso':new_curso}) #Vuelvo al inicio o a donde quieran
+    else:
+        miFormulario=CursoFormulario()#Formulario vacio para construir el html
+        
+    return render(request,"AppCpder/cursos.html", {"miFormulario":miFormulario})
 
 
 
@@ -100,24 +115,6 @@ def entregables(request):
     return render(request, "AppCpder/entregables.html")
 
 
-def cursoFormulario(request):
-    if request.method == 'POST':
-        miFormulario= CursoFormulario(request.POST)
-        #Aqui me llega toda la informacion del html
-        print(miFormulario)
-        
-        if miFormulario.is_valid():#Si paso la validacion de Django
-            informacion = miFormulario.cleaned_data
-            
-            new_curso = Curso(nombre=informacion['curso'],camada=informacion['camada'])
-            
-            new_curso.save()
-            return render(request,"AppCpder/inicio.html",{'new_curso':new_curso}) #Vuelvo al inicio o a donde quieran
-    else:
-        miFormulario=CursoFormulario()#Formulario vacio para construir el html
-        
-    return render(request,"AppCpder/cursoFormulario.html", {"miFormulario":miFormulario})
-
 def profesorFormulario(request):
     if request.method == 'POST':
         miFormulario= ProfesorFormulario(request.POST)#Aqui me llega toda la informacion del html
@@ -135,3 +132,23 @@ def profesorFormulario(request):
         miFormulario=ProfesorFormulario()#Formulario vacio para construir el html
         
     return render(request,"AppCpder/profesorFormulario.html", {"miFormulario":miFormulario})
+
+
+def findCamada(request):
+    
+    return render(request, "AppCpder/findCamada.html")
+
+
+def buscar(request):
+    if request.GET["camada"]:#si envio un dato de camada
+        
+        camada=request.GET['camada'] #lo guardo en variabe camada
+        cursos = Curso.objects.filter(camada__icontains=camada)
+        #almaceno las respuestas en la variables cursos
+        
+        return render(request,"AppCpder/inicio.html",{"cursos":cursos,"camada":camada})
+    else:
+        respuesta="No enviaste datos"
+    
+    return render(request, "AppCpder/inicio.html", {"respuesta":respuesta})
+    

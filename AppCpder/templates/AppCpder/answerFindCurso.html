@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=<device-width>, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    {% if cursos %}
+        <!--Si en views encuenrtra algun curso con el numero 
+            de camada mencionado pasa lo que esta dentro-->
+        <p>Estamos buscando el: {{camada}}</p>
+        <ul>
+        {% for curso in cursos %}
+            <li> {{curso.nombre}} - {{curso.camada}}  </li>
+        {% endfor %}
+    </ul>
+
+    {% else %}
+        <p>No hay datos con esa descripcion</p>
+    {% endif %}
+
+    <p style = "color: red;">{{respuesta}}</p>
+    <!--Solo aparecerá la respyuesta si le enviamos ubna respuesta a la pagina-->
+    
+</body>
+</html>
