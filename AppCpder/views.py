@@ -102,16 +102,17 @@ def entregables(request):
 
 def cursoFormulario(request):
     if request.method == 'POST':
-        miFormulario= CursoFormulario(request.POST)#Aqui me llega toda la informacion del html
+        miFormulario= CursoFormulario(request.POST)
+        #Aqui me llega toda la informacion del html
         print(miFormulario)
         
-        if miFormulario.is_valid:#Si paso la validacion de Django
+        if miFormulario.is_valid():#Si paso la validacion de Django
             informacion = miFormulario.cleaned_data
             
-            curso = Curso(nombre=informacion['curso'],camada=informacion['camada'])
+            new_curso = Curso(nombre=informacion['curso'],camada=informacion['camada'])
             
-            curso.save()
-            return render(request,"AppCpder/inicio.html") #Vuelvo al inicio o a donde quieran
+            new_curso.save()
+            return render(request,"AppCpder/inicio.html",{'new_curso':new_curso}) #Vuelvo al inicio o a donde quieran
     else:
         miFormulario=CursoFormulario()#Formulario vacio para construir el html
         
@@ -129,7 +130,7 @@ def profesorFormulario(request):
                              email=informacion['email'],profesion=informacion['profesion'])
             
             profesor.save()
-            return render(request,"AppCpder/inicio.html") #Vuelvo al inicio o a donde quieran
+            return render(request,"AppCpder/inicio.html",{'profesor':profesor}) #Vuelvo al inicio o a donde quieran
     else:
         miFormulario=ProfesorFormulario()#Formulario vacio para construir el html
         

@@ -16,12 +16,12 @@
     <form action="" method="POST"> 
         {% csrf_token %}
         <!--Acá esta la magia de Django-->
-        <p>Curso: <input type="text" name="curso"> </p>
+        {% comment %} <p>Curso: <input type="text" name="curso"> </p>
 				<!-- input: son espacion para escribir informacion -->
-        <p>Camada: <input type="number" name="camada"> </p>
+        <p>Camada: <input type="number" name="camada"> </p> {% endcomment %}
         
         <table>
-            {{ mi_Formulario.as_table }}
+            {{ miFormulario.as_table }}
         </table>
 
         <input type="submit",value="Enviar">
