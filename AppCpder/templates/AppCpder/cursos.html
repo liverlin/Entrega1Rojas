@@ -12,10 +12,6 @@
 
         <form action="" method="POST"> 
             {% csrf_token %}
-            <!--Acá esta la magia de Django-->
-            {% comment %} <p>Curso: <input type="text" name="curso"> </p>
-                    <!-- input: son espacion para escribir informacion -->
-            <p>Camada: <input type="number" name="camada"> </p> {% endcomment %}
             
             <table>
                 {{ miFormulario.as_table }}

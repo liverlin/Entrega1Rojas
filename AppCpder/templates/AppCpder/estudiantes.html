@@ -1,12 +1,24 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Estudiantes</title>
-</head>
-<body style="background-color: green;">
-    vista estudiantes
-</body>
-</html>
+
+{% extends "AppCpder/padre.html" %}
+	{% load static %}
+
+{% block contenidoQueCambia %}
+    <body style="background-color: lightblue;">
+        <h1>Vista estudiantes</h1>
+        <h2>Formulario - Agregar estudiante</h2>
+        {% if miFormulario.errors %}
+        
+        <p style="color: red;">Están mal los datos, revisar</p>
+        {% endif %}
+
+        <form action="" method="POST">{% csrf_token %}
+            
+            <table>
+                {{ miFormulario.as_table }}
+            </table>
+
+            <input type="submit",value="Enviar">
+
+        </form>
+    </body>
+{% endblock %}

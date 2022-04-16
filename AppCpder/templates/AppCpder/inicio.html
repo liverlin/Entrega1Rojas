@@ -7,20 +7,18 @@
     <p> Se ha heredado todo desde la plantilla padre </p>
     <h3>En el hijo, inicio. html, casi no hay nada :)</h3>
     
-    <p>Estamos buscando el: {{camada}}</p>
-
+    
     {% if cursos %}
-    <ul>
-    {% for curso in cursos %}
-        <li> {{curso.nombre}} - {{curso.camada}}  </li>
-    {% endfor %}
-    </ul>
-
+        <p>Estamos buscando el: {{camada}}</p>
+        <ul>
+        {% for curso in cursos %}
+            <li> {{curso.nombre}} - {{curso.camada}}  </li>
+        {% endfor %}
+        </ul>
     {% else %}
-    <p>No hay datos con esa descripcion</p>
+        <p>No hay datos con esa descripcion</p>
     {% endif %}
 
     <p style = "color: red;">{{respuesta}}</p>
-
 
 {% endblock %}
