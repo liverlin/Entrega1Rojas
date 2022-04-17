@@ -1,0 +1,26 @@
+{% extends "AppCpder/padre.html" %}
+	{% load static %}
+
+{% block contenidoQueCambia %}
+    <body style="background-color: lightblue;">
+        <a href="profesores">Agregar otro Profesor</a> 
+
+        {% for teacher in profesores %}
+        
+            <li>
+                {{teacher}}
+                <button>
+                    <a href="{% url 'EliminarProfesor' teacher.nombre %}">Eliminar</a>
+                    <!--"Redicciona a  web/EliminarProfesor/nombre del profesor"
+                    Como se puede ver en las urls.py-->
+                    {% comment %} <a href="{% url 'EditarProfesor' teacher.nombre %}">Editar</a> {% endcomment %}
+                    <a href="{% url 'EditProfesor' teacher.nombre %}">Editar</a>
+                </button>
+            </li>
+        {% endfor %}
+
+
+    </body>
+
+
+{% endblock %}
