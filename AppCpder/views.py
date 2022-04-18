@@ -1,15 +1,23 @@
-
 from django.shortcuts import redirect, render
+#Para CRUD
 from django.views.generic import ListView
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import UpdateView, DeleteView, CreateView
 from django.urls import reverse_lazy
 
+#Para Login/out
+from django.contrib.auth import login, logout, authenticate
+from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth.models import User
+#Decorador por defecto
+from django.contrib.auth.decorators import login_required
+
+
 
 from AppCpder.models import Curso, Estudiante, Profesor
-from AppCpder.forms import CursoFormulario, ProfesorFormulario, EstudiantesForm
+from AppCpder.forms import CursoFormulario, ProfesorFormulario, EstudiantesForm, UserRegisterForm, UserEditForm
 
-
+@login_required #Ahora con esta linea solopodré acceder a inicio si es que estoy logueado
 def inicio(request):
     
     return render(request, "AppCpder/inicio.html",{})
@@ -156,25 +164,101 @@ def editProf(request, profesor_nombre):
 #CRUD MAS SIMPLE
 
 class CursoList(ListView):
-            
-    model= Curso
-    template_name = "AppCpder/cursos_list.html"
+
+      model = Curso 
+      template_name = "AppCpder/cursos_list.html"
+
+
 
 class CursoDetalle(DetailView):
-    model=Curso
-    template_name ="AppCpder/curso_detail.html"
+
+      model = Curso
+      template_name = "AppCpder/curso_detalle.html"
+
+
 
 class CursoCreacion(CreateView):
-    model=Curso
-    succes_url = "/AppCpder/curso/list"
-    fields = ['nombre','camada']
 
-class CursoUptate(UpdateView):
-    model=Curso
-    succes_url = "/AppCpder/curso/list"
-    fields = ['nombre','camada']
-    
+      model = Curso
+      success_url = "/AppCpder/curso/list"
+      fields = ['nombre', 'camada']
+
+
+class CursoUpdate(UpdateView):
+
+      model = Curso
+      success_url = "/AppCpder/curso/list"
+      fields  = ['nombre', 'camada']
+
+
 class CursoDelete(DeleteView):
-    model=Curso
-    succes_url = "/AppCpder/curso/list"
+
+      model = Curso
+      success_url = "/AppCpder/curso/list"
+
+
+def login_request(request):
     
+    if request.method =='POST':
+        form = AuthenticationForm(request, data = request.POST)
+        
+        if form.is_valid():
+            usuario = form.cleaned_data.get('username')
+            contra = form.cleaned_data.get('password')
+            
+            user= authenticate(username=usuario, password=contra)
+            
+            if user is not None:
+                login(request,user)
+                return render(request,"AppCpder/inicio.html", {"mensaje":f"Bienvenido {usuario}"})
+            else:
+                return render(request,"AppCpder/inicio.html", {"mensaje":"Error, datos incorrectos"})
+        
+        else:
+            return render(request,"AppCpder/inicio.html", {"mensaje":"Error, fomulario errores"})
+    
+    form = AuthenticationForm()
+    
+    return render(request,"AppCpder/login.html", {"form":form})
+    
+
+def register(request):
+    
+    if request.method =='POST':
+        
+        #form = UserCreationForm(request.POST)
+        form = UserRegisterForm(request.POST)
+        if form.is_valid():
+            username = form.cleaned_data['username']
+            form.save()
+            return render(request,"AppCpder/inicio.html", {"mensaje":"Usuario creado exitosamente c:"})
+        
+    else:
+        form = UserRegisterForm()
+        
+    return render(request,"AppCpder/registro.html", {"form":form})
+
+@login_required
+def editPerfil(request):
+    #Instancia del login
+    usuario = request.user
+    
+    #Si es metodo POST, hace lo mismo que el agregar
+    if request.method == "POST":
+        
+        miFormulario = UserEditForm(request.POST)
+        
+        if miFormulario.is_valid: #Si pasó la validación de Django
+            info= miFormulario.cleaned_data
+            usuario.email= info['email']
+            usuario.password1= info['password1']
+            usuario.password2= info['password2']
+            usuario.save()
+            
+        return render(request, "AppCpder/inicio.html")
+    #En caso no sea post (osea GET, lo que quiere decir que es la primera ve que se entra a editar)
+    else:
+        #Creo el formulario con los datos que voy a modificar
+        miFormulario= UserEditForm(initial={'email':info.email})
+        #Voy al html que me permite editar
+        return render(request,"AppCpder/editPerfil.html",{"miFormulario":miFormulario, "usuario": usuario})

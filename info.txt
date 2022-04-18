@@ -5,3 +5,7 @@ git push
 git commmit -m
 
 . venv/Scripts/activate 
+
+Reyex 1:44 pyg van 1
+para determinar un numero especifico de string
+^editar/(?P<pk>\d+)$

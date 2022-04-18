@@ -29,11 +29,16 @@
             <div class="container">
                 {% comment %} <a class="navbar-brand" href="#!">Comenzar Bootstrap</a> {% endcomment %}
                 <!--<a class="navbar-brand" href="{% url 'Inicio' %}">Inicio</a>-->
+                <a class="btn btn-primary" href="{% url 'Inicio' %}">INICIO</a>
+                
                 <a class="navbar-brand" href="{% url 'Profesores' %}">Profesores</a>
                 <a class="navbar-brand" href="{% url 'Cursos' %}">Cursos</a>
                 <a class="navbar-brand" href="{% url 'Estudiantes' %}">Estudiantes</a>
+                <a class="navbar-brand" href="{% url 'List' %}">Lista de Cursos</a>
                 {% comment %} <!--<a class="navbar-brand" href="{% url 'Entregables' %}">Entregables</a>--> {% endcomment %}
-                <a class="btn btn-primary" href="{% url 'Inicio' %}">INICIO</a>
+                <a class="btn btn-primary" href="{% url 'Register' %}">Registrarse</a>
+                <a class="btn btn-primary" href="{% url 'Login' %}">LOG IN</a>
+                <a class="btn btn-primary" href="{% url 'Logout' %}">LOG OUT</a>
             </div>
         </nav>
         <!-- Masthead-->

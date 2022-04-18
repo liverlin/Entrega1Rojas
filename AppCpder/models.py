@@ -1,4 +1,6 @@
 from django.db import models
+#MIXIN Avanzado 2
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 # Create your models here.
 class Curso(models.Model):
@@ -27,3 +29,9 @@ class Profesor(models.Model):
 
     def __str__(self):
         return f"Prof.: {self.nombre} - Apellido: {self.apellido} - Email: {self.email} - Profesion: {self.profesion}"
+
+
+# class ClaseQueNecesitaLogin(LoginRequiredMixin):
+    
+#     def __str__(self):
+#         return f"Wiii por ahora está vacía"
