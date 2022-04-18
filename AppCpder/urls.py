@@ -7,7 +7,7 @@ from .views import buscar, editarPerfil, editProf, eliminarProfesor, findCamada,
 #Para CRUD
 from .views import CursoList,CursoDetalle,CursoCreacion,CursoDelete,CursoUpdate
 #Para Login/out
-from .views import login_request, user_info
+from .views import login_request, user_info, about 
 from django.contrib.auth.views import LogoutView
 
 #, inicio_1
@@ -41,4 +41,5 @@ urlpatterns = [
     #PPT Avanzado3 Edicion de usuario
     path('editarPerfil', editarPerfil, name="EditarPerfil"),
     path('info_datos/', user_info, name="user_info"),
+    path('about/', about, name= 'about')
 ]

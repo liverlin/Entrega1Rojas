@@ -120,22 +120,8 @@ def eliminarProfesor(request, profesor_nombre):
     profesor = Profesor.objects.get(nombre=profesor_nombre)
     profesor.delete()
     
-    #vuelvo al menú
-    # profesores= Profesor.objects.all()
-    #return render(request,"AppCpder/leerProfesores.html",{"profesores": profesores})
-    #vuelvo al menú más rápido y muestro a los profesores
     return redirect('showProfesores')
 
-# def leerProfesores(request, profesor_nombre='a'):
-    
-#     if profesor_nombre!='a':
-#         profesor = Profesor.objects.get(nombre=profesor_nombre)
-#         profesor.delete()
-    
-#     profesores = Profesor.objects.all() #trae todos los profesores creados
-#     contexto={"profesores":profesores}
-    
-#     return render(request, "AppCpder/leerProfesores.html",contexto)
 
 def editProf(request, profesor_nombre):
     
@@ -171,12 +157,10 @@ class CursoList(ListView):
       template_name = "AppCpder/cursos_list.html"
 
 
-
 class CursoDetalle(DetailView):
 
       model = Curso
       template_name = "AppCpder/curso_detalle.html"
-
 
 
 class CursoCreacion(CreateView):
@@ -300,3 +284,7 @@ def user_info(request):
     user_data, _ = Avatar.objects.get_or_create(user=request.user)
     return render(request, 'AppCpder/info_user.html', {'user_data':user_data})
 
+
+def about(request):
+    
+    return render(request, "AppCpder/About.html")

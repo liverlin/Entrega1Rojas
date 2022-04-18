@@ -11,6 +11,7 @@ para determinar un numero especifico de string
 ^editar/(?P<pk>\d+)$
 
 
+
 userprueba
 uwu@yola.com
 123456perro
