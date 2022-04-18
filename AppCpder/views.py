@@ -13,11 +13,13 @@ from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 
 
+from .forms import UserRegisterForm, UserEditForm
+from .models import Avatar
 
 from AppCpder.models import Curso, Estudiante, Profesor
 from AppCpder.forms import CursoFormulario, ProfesorFormulario, EstudiantesForm, UserRegisterForm, UserEditForm
 
-@login_required #Ahora con esta linea solopodré acceder a inicio si es que estoy logueado
+#@login_required #Ahora con esta linea solopodré acceder a inicio si es que estoy logueado
 def inicio(request):
     
     return render(request, "AppCpder/inicio.html",{})
@@ -238,27 +240,63 @@ def register(request):
         
     return render(request,"AppCpder/registro.html", {"form":form})
 
+
 @login_required
-def editPerfil(request):
-    #Instancia del login
-    usuario = request.user
-    
-    #Si es metodo POST, hace lo mismo que el agregar
-    if request.method == "POST":
-        
-        miFormulario = UserEditForm(request.POST)
-        
-        if miFormulario.is_valid: #Si pasó la validación de Django
-            info= miFormulario.cleaned_data
-            usuario.email= info['email']
-            usuario.password1= info['password1']
-            usuario.password2= info['password2']
-            usuario.save()
+def editarPerfil(request):
+    user_extension_logued, _ = Avatar.objects.get_or_create(user=request.user)
+    form = UserEditForm(
+        initial={
+            'email' : request.user.email,
+            'password1': '',
+            'password2': '',
+            'first_name': request.user.first_name,
+            'last_name': request.user.last_name,
+            'avatar': user_extension_logued.avatar,
+            'link': user_extension_logued.link,
+            'additional_description': user_extension_logued.additional_description,
+        }
+    )
+
+    if request.method == 'POST':
+        form = UserEditForm(request.POST, request.FILES)
+
+        if form.is_valid():
+            request.user.email = form.cleaned_data['email']
+            request.user.first_name = form.cleaned_data['first_name']
+            request.user.last_name = form.cleaned_data['last_name']
+            user_extension_logued.avatar = form.cleaned_data['avatar']
+            user_extension_logued.link = form.cleaned_data['link']
+            user_extension_logued.additional_description = form.cleaned_data['additional_description']
+
+            if form.cleaned_data['password1'] != '' and form.cleaned_data['password1'] == form.cleaned_data['password2']:
+                request.user.set_password(form.cleaned_data['password1'])
             
-        return render(request, "AppCpder/inicio.html")
-    #En caso no sea post (osea GET, lo que quiere decir que es la primera ve que se entra a editar)
-    else:
-        #Creo el formulario con los datos que voy a modificar
-        miFormulario= UserEditForm(initial={'email':info.email})
-        #Voy al html que me permite editar
-        return render(request,"AppCpder/editPerfil.html",{"miFormulario":miFormulario, "usuario": usuario})
+            request.user.save()
+            user_extension_logued.save()
+
+            return render(request, 'AppCpder/inicio.html', {'mensaje': 'Usuario actualizado correctamente'})
+        
+        else:
+            return render(request, 'AppCpder/editarPerfil.html', {'form': form, 'mensaje': 'El formulario no es valido.'})
+    
+    form = UserEditForm(
+        initial={
+            'email' : request.user.email,
+            'password1': '',
+            'password2': '',
+            'first_name': request.user.first_name,
+            'last_name': request.user.last_name,
+            'avatar': user_extension_logued.avatar,
+            'link': user_extension_logued.link,
+            'additional_description': user_extension_logued.additional_description,
+        }
+    )
+
+    return render(request, 'AppCpder/editarPerfil.html', {'form': form})
+
+
+@login_required
+def user_info(request):
+    user_data, _ = Avatar.objects.get_or_create(user=request.user)
+    return render(request, 'AppCpder/info_user.html', {'user_data':user_data})
+

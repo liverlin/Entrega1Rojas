@@ -9,3 +9,9 @@ git commmit -m
 Reyex 1:44 pyg van 1
 para determinar un numero especifico de string
 ^editar/(?P<pk>\d+)$
+
+
+userprueba
+uwu@yola.com
+123456perro
+123456gato

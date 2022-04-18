@@ -1,0 +1,21 @@
+{% extends "AppCpder/padre.html" %}
+	{% load static %}
+{%block contenidoQueCambia %}
+    <h2>Informacion de perfil </h2>
+
+    <p>
+        <li>Nombre: {{ request.user.first_name }}</li>
+        <li>Apellido: {{ request.user.last_name }}</li>
+        <li>Email: {{ request.user.email }}</li>
+        {% if user_data.avatar%}
+            <li>Avatar: <img src="{{ user_data.avatar.url }}" alt="imagen de perfil" width="300" height="225"></li>
+        {% endif %}
+        <li>Link: 
+        {% if user_data.link %}
+            <a href = {{ user_data.link }}> {{ user_data.link}}</a></li>
+        {% endif %}
+    </p>
+
+    <a href={% url 'EditarPerfil' %}>Editar</a>
+
+{% endblock contenidoQueCambia%}

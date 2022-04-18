@@ -3,11 +3,11 @@ from re import template
 from django import views
 from django.urls import path
 #, numero_de_usuario,otra_vista,numero_random, mi_plantilla,probandoTemplate,curso, nuevo_curso, profesores
-from .views import buscar, editPerfil, editProf, eliminarProfesor, findCamada, inicio,cursos, estudiantes,profesores, register,showProfesores
+from .views import buscar, editarPerfil, editProf, eliminarProfesor, findCamada, inicio,cursos, estudiantes,profesores, register,showProfesores
 #Para CRUD
 from .views import CursoList,CursoDetalle,CursoCreacion,CursoDelete,CursoUpdate
 #Para Login/out
-from .views import login_request
+from .views import login_request, user_info
 from django.contrib.auth.views import LogoutView
 
 #, inicio_1
@@ -39,5 +39,6 @@ urlpatterns = [
     path('logout', LogoutView.as_view(template_name='AppCpder/logout.html'),name='Logout'),
     
     #PPT Avanzado3 Edicion de usuario
-    path('editarPerfil', editPerfil, name="EditarPerfil"),
+    path('editarPerfil', editarPerfil, name="EditarPerfil"),
+    path('info_datos/', user_info, name="user_info"),
 ]
