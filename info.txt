@@ -12,7 +12,13 @@ para determinar un numero especifico de string
 
 
 
-userprueba
+name: userprueba
 uwu@yola.com
+contraseña:
 123456perro
 123456gato
+
+
+admin
+name: Oliver
+123456
