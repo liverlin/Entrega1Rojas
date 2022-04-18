@@ -1,10 +1,12 @@
-{% extends "AppCpder/padre.html" %}
+{% extends "Aula/padre.html" %}
 	{% load static %}
 
 {% block contenidoQueCambia %}
-    <body>
-        <h1>Vista editar profesores</h1>
+    <body style="background-color: lightgray;">
+        <h1>Vista profesores</h1>
         <h2>Formulario - Agregar Profesor</h2>
+
+        <a href="{% url 'showProfesores' %}">Lista de profesores</a> 
 
         {% if miFormulario.errors %}
         <p style="color: red;">Están mal los datos, revisar</p>

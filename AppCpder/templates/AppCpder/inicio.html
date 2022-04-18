@@ -15,8 +15,8 @@
             <li> {{curso.nombre}} - {{curso.camada}}  </li>
         {% endfor %}
         </ul>
-    {% else %}
-        <p>No hay datos con esa descripcion</p>
+        {% comment %} {% else %}
+        <p>No hay datos con esa descripcion</p> {% endcomment %}
     {% endif %}
 
     <p style = "color: red;">{{respuesta}}</p>

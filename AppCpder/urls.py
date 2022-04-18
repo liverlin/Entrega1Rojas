@@ -1,9 +1,9 @@
-import imp
+
 from re import template
 from django import views
 from django.urls import path
 #, numero_de_usuario,otra_vista,numero_random, mi_plantilla,probandoTemplate,curso, nuevo_curso, profesores
-from .views import buscar, editarPerfil, editProf, eliminarProfesor, findCamada, inicio,cursos, estudiantes,profesores, register,showProfesores
+from .views import buscar, editarPerfil, findCamada, inicio,cursos, register
 #Para CRUD
 from .views import CursoList,CursoDetalle,CursoCreacion,CursoDelete,CursoUpdate
 #Para Login/out
@@ -16,15 +16,9 @@ urlpatterns = [
     # path('curso',curso),
     path('', inicio, name="Inicio"),
     path('cursos',cursos,name="Cursos"),
-    path('profesores',profesores,name="Profesores"),
-    path('estudiantes',estudiantes,name="Estudiantes"),
+
     path('findCamada',findCamada,name="findCamada"),
     path('AppCpder/buscar/',buscar),
-    
-    #CRUD Básico
-    path('showProfesores',showProfesores,name="showProfesores"),
-    path('eliminarProfesor/<profesor_nombre>/',eliminarProfesor, name="EliminarProfesor"),
-    path('editProfesor/<profesor_nombre>/',editProf, name="EditProfesor"),
     
     #CRUD mas simple
     path('AppCpder/curso/list',CursoList.as_view(),name='List'),

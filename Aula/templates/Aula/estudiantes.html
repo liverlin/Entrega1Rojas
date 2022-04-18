@@ -1,11 +1,12 @@
 
-{% extends "AppCpder/padre.html" %}
+{% extends "Aula/padre.html" %}
 	{% load static %}
 
 {% block contenidoQueCambia %}
     <body style="background-color: lightyellow;">
         <h1>Vista estudiantes</h1>
         <h2>Formulario - Agregar estudiante</h2>
+        <a href="{% url 'showEstudiantes' %}">Lista de alumnos</a> 
         {% if miFormulario.errors %}
         
         <p style="color: red;">Están mal los datos, revisar</p>

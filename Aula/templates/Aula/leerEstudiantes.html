@@ -1,0 +1,17 @@
+{% extends "Aula/padre.html" %}
+	{% load static %}
+
+{% block contenidoQueCambia %}
+    <body style="background-color: lightblue;">
+ 
+        {% for alumno in estudiantes %}
+        
+            <li>
+                {{alumno}}
+            </li>
+        {% endfor %}
+
+    </body>
+
+
+{% endblock %}
