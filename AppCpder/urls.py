@@ -35,5 +35,5 @@ urlpatterns = [
     #PPT Avanzado3 Edicion de usuario
     path('editarPerfil', editarPerfil, name="EditarPerfil"),
     path('info_datos/', user_info, name="user_info"),
-    path('about/', about, name= 'about')
+    path('about/', about, name="About")
 ]

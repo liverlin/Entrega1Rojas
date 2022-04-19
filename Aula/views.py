@@ -96,4 +96,4 @@ def editProf(request, profesor_nombre):
         miFormulario= ProfesorFormulario(initial={'nombre': prof.nombre, 
             'apellido':prof.apellido, 'email':prof.email, 'profesion': prof.profesion})
         #Voy al html que me permite editar
-        return render(request,"AppCpder/editProfesor.html",{"miFormulario":miFormulario, "profesor_nombre":profesor_nombre})
+        return render(request,"Aula/editProfesor.html",{"miFormulario":miFormulario, "profesor_nombre":profesor_nombre})

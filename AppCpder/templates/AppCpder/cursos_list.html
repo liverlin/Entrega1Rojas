@@ -8,6 +8,11 @@
 </head>
 <body style="background-color: lightgreen;">
     <h1>Cursos de Coder - Python</h1>
+    <li class="list-inline-item">
+        <a href="{% url 'New' %}">Crear nuevo curso</a> |
+        <a href="{% url 'Inicio' %}">Volver a la pagina principal</a> |
+        <a href="{% url 'findCamada' %}">Buscar curso</a> 
+    </li>
     <ul>
         {% for curso in object_list %}
         
@@ -22,11 +27,7 @@
 
         {% endfor %}
     </ul>
-
-    <li class="list-inline-item">
-        <a href="{% url 'New' %}">Crear nuevo curso</a> |
-        <a href="{% url 'Inicio' %}">Volver a la pagina principal</a>
-    </li>
+    
 
 </body>
 </html>
